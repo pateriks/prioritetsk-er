@@ -146,10 +146,12 @@ void display_list(){
 int main(int argc, char *argv[]){
 	srand(time(0));
 	struct timespec t_start, t_stop;
-	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 
 	int input = argv[1] != NULL ? atoi(argv[1]) : 0;
 	int input2 = argv[2] != NULL ? atoi(argv[2]) : 0;
+
+	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
+
 	if (input2 == -1) {
 		int inc = 1;
 		//best case

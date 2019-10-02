@@ -62,10 +62,10 @@ void insert(double p){
 void delete(){
   if(root != NULL){
     struct s_heap *tmp = root;
+	double t = tmp->priority;
     tmp = merge(tmp->left, tmp->right);
 	free(root);
 	root = tmp;
-    double t = tmp->priority;
 
     for (int i = 0; i < NUMBER_EVENTS; i++) {
       double p = t + (rand() % MAX_RAND);
@@ -89,10 +89,11 @@ void display_skew(s_heap *r){
 int main(int argc, char *argv[]){
 	srand(time(0));
 	struct timespec t_start, t_stop;
-	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 
 	int input = argv[1] != NULL ? atoi(argv[1]) : 0;
 	int input2 = argv[2] != NULL ? atoi(argv[2]) : 0;
+
+	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 
 	if (input2 == -1) {
 		int inc = 1;
@@ -103,7 +104,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	else if (input2 == -3) {
+	else if (input2 == -2) {
 		//worst case
 		int inc = input;
 		for (int i = input-1; i >= 0; i--) {
@@ -112,7 +113,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	else if (input2 == -2) {
+	else if (input2 == -3) {
 		//worst case
 		int inc = 1;
 		int shift = 1;
