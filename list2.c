@@ -32,19 +32,19 @@ void insertBack(struct eventlist *node){
   while((tmp != NULL) && (p < tmp->prio)){
     tmp = tmp->prev;
   }
-  if(tmp == NULL){ //DÅ ÄR NODE FÖRSTA ELEMENTET
+  if(tmp == NULL){
     firstNode->prev = node;
     node->next = firstNode;
     node->prev = NULL;
     firstNode = node;
     return;
-  }else if(tmp == lastNode){ //DÅ ÄR NODE SISTA ELEMENTET
+  }else if(tmp == lastNode){
     lastNode->next = node;
     node->prev = lastNode;
     node->next = NULL;
     lastNode = node;
     return;
-  }else{ //ANNARS ÄR DET NÅNSTANS I MITTEN
+  }else{
     struct eventlist *tmp_next = tmp->next;
     node->next = tmp_next;
     node->prev = tmp;
@@ -60,19 +60,19 @@ void insertFront(struct eventlist *node){
   while((tmp != NULL) && (p >= tmp->prio)){
     tmp = tmp->next;
   }
-  if(tmp == NULL){ //DÅ ÄR NODE SISTA ELEMENTET
+  if(tmp == NULL){
     lastNode->next = node;
     node->prev = lastNode;
     node->next = NULL;
     lastNode = node;
     return;
-  }else if(tmp == firstNode){ //DÅ ÄR NODE FÖRSTA ELEMENTET
+  }else if(tmp == firstNode){
     node->next = firstNode;
     firstNode->prev = node;
     node->prev = NULL;
     firstNode = node;
     return;
-  }else{ //ANNARS ÄR DET NÅNSTANS I MITTEN
+  }else{
     struct eventlist *tmp_prev = tmp->prev;
     tmp_prev->next = node;
     tmp->prev = node;
@@ -85,12 +85,12 @@ void insertFront(struct eventlist *node){
 
 void insert(double p){
   struct eventlist *element = construct(p);
-  if((firstNode == NULL) && (lastNode == NULL)){ //FINNS INGET ELEMENT I LISTAN
+  if((firstNode == NULL) && (lastNode == NULL)){
     firstNode = element;
     lastNode = element;
     return;
   }
-  if(firstNode == lastNode){ //FINNS BARA ETT ELEMENT I LISTAN
+  if(firstNode == lastNode){
     if(p < firstNode->prio){
       element->next = lastNode;
       lastNode->prev = element;
@@ -105,7 +105,7 @@ void insert(double p){
   }
   double firstprio = firstNode->prio;
   double lastprio = lastNode->prio;
-  if(p > ((lastprio + firstprio) / 2)){ //FINNS MINST TVÅ ELEMENT I LISTAN
+  if(p > ((lastprio + firstprio) / 2)){
     insertFront(element);
   }else{
     insertBack(element);
@@ -114,8 +114,7 @@ void insert(double p){
 
 //delete tar bort elementet längst fram och skapar NUMBER_EVENTS nya events med random prioritet
 void delete(){
-  //time_t t;
-  //srand((unsigned) time(&t));
+
   if(firstNode != NULL){
     struct eventlist *delElem = firstNode;
     double t = delElem->prio;
@@ -124,8 +123,7 @@ void delete(){
       firstNode->prev = NULL;
     }
     free(delElem);
-    //allocated_memory = allocated_memory - (int) sizeof(eventlist);
-    //int events = rand() % NUMBER_EVENTS;
+
     for(int i = 0; i < NUMBER_EVENTS; i++){
       double p = t + (rand() % MAX_RAND);
       insert(p);
@@ -146,6 +144,7 @@ void display_list(){
 
 //DRIVER PROGRAM
 int main(int argc, char *argv[]){
+	srand(time(0));
 	struct timespec t_start, t_stop;
 	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 

@@ -87,6 +87,7 @@ void display_skew(s_heap *r){
 
 //DRIVER PROGRAM
 int main(int argc, char *argv[]){
+	srand(time(0));
 	struct timespec t_start, t_stop;
 	clock_gettime(CLOCK_MONOTONIC_COARSE, &t_start);
 
@@ -102,7 +103,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	else if (input2 == -2) {
+	else if (input2 == -3) {
 		//worst case
 		int inc = input;
 		for (int i = input-1; i >= 0; i--) {
@@ -111,7 +112,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 
-	else if (input2 == -3) {
+	else if (input2 == -2) {
 		//worst case
 		int inc = 1;
 		int shift = 1;
