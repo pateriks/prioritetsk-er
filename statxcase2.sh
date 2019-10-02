@@ -1,5 +1,5 @@
 #!/bin/bash
-iterations=({10000..1000000..1000})
+iterations=({1000..10000..50})
 for val in ${iterations[@]}; do
 	./skew $val -1
 	printf "\t"
